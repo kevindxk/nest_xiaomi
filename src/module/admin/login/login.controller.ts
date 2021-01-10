@@ -4,15 +4,15 @@ import { AdminService } from '../../../service/admin/admin.service';
 @Controller('admin/login')
 export class LoginController {
 
-    constructor(private adminService:AdminService);
+    // constructor(private adminService:AdminService);
 
 
-    @Get()
-    @Render('admin/login')
-    async index() {
-        console.log(await this.adminService.find())
-        return {};
-    }
+    // @Get()
+    // @Render('admin/login')
+    // async index() {
+    //     console.log(await this.adminService.find())
+    //     return {};
+    // }
 
     @Post("dologin")
     doLogin(@Body() body,@Request() req){
