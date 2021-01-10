@@ -71,3 +71,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+# neststudy
+nest学习
+- 安装nest脚手架 npm install -g @nestjs/cli
+- 创建项目 nest new nestdemo
+- 运行项目 yarn run start/npm run start:dev
+- 127.0.0.1:3000
