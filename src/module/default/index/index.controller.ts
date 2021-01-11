@@ -1,9 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
 
-@Controller('index')
+@Controller('default/index')
 export class IndexController {
 
-    @Get()
+    @Get("user")
     index(){
         return "this is default"
     }

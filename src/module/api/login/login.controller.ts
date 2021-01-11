@@ -1,8 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 
-@Controller('login')
+@Controller('api/login')
 export class LoginController {
-    @Get()
+    @Get("user")
     indx(){
         return "this is api login"
     }
