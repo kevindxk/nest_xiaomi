@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Render,Request } from '@nestjs/common';
+import { Body, Controller, Get, Post, Render, Request } from '@nestjs/common';
 import { AdminService } from '../../../service/admin/admin.service';
 
 @Controller('admin/login')
@@ -14,14 +14,20 @@ export class LoginController {
     //     return {};
     // }
 
+    @Get()
+    @Render('admin/login')
+    index() {
+        return {};
+    }
+
     @Post("dologin")
-    doLogin(@Body() body,@Request() req){
+    doLogin(@Body() body, @Request() req) {
 
         var code = body.code;
         var username = body.username;
         var password = body.password;
 
-        if (username=="" || password.length<6){
+        if (username == "" || password.length < 6) {
             console.log("用户名 或密码不合法")
         }
 
