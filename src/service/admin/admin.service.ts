@@ -5,8 +5,8 @@ import {InjectModel} from '@nestjs/mongoose';
 export class AdminService {
     constructor(@InjectModel('admin') private readonly adminModel){}
 
-    async find(){
-        return await this.adminModel.find()
+    async find(json={}){
+        return await this.adminModel.find(json)
     }
 
 }

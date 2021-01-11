@@ -3,6 +3,9 @@ import { Injectable } from '@nestjs/common';
 //引入模块
 import * as svgCaptcha from 'svg-captcha';
 
+// var md5 = require("md5");
+import * as md5 from 'md5';
+
 @Injectable()
 export class ToolsService {
 
@@ -17,4 +20,8 @@ export class ToolsService {
         return captcha;
     }
 
+
+    getMd5(str:String){
+        return md5(str);
+    }
 }
