@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Post, Render, Request } from '@nestjs/common';
+import { Body, Controller, Get, Post, Render, Request,Response } from '@nestjs/common';
+import { get } from 'mongoose';
 import { AdminService } from '../../../service/admin/admin.service';
+import {ToolsService} from '../../../service/tools/tools.service'
 
 @Controller('admin/login')
 export class LoginController {
 
-    // constructor(private adminService:AdminService);
+    constructor(private toolsService:ToolsService){};
 
 
     // @Get()
@@ -19,6 +21,18 @@ export class LoginController {
     index() {
         return {};
     }
+
+    @Get('code')
+    getCode(@Request() req,@Response() res){
+        var svgCaptcha = this.toolsService.getCaptcha();
+
+        //设置session
+        req.session.code = svgCaptcha.text;
+        res.type('image/svg+xml');
+        res.send(svgCaptcha.data)
+
+    }
+
 
     @Post("dologin")
     doLogin(@Body() body, @Request() req) {

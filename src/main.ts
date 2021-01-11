@@ -9,7 +9,9 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   //设置静态资源目录
-  app.useStaticAssets(path.join(__dirname, "public"));
+  app.useStaticAssets(path.join(__dirname,'..', "public"));
+  // app.useStaticAssets(path.join(__dirname, '..', 'public'));
+
 
   //设置模板引擎
   app.setBaseViewsDir("views");
@@ -19,7 +21,13 @@ async function bootstrap() {
   app.use(cookieParser("this signed cookies"))
 
   //配置 session 的中间件 
-  app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { maxAge: 1000 * 60 * 30, httpOnly: true }, rolling: true }));
+  app.use(session({ 
+    secret: 'keyboard cat', 
+    resave: true, 
+    saveUninitialized: true, 
+    cookie: { maxAge: 1000 * 60 * 30, httpOnly: true }, 
+    rolling: true
+   }));
 
   await app.listen(3000);
 }
