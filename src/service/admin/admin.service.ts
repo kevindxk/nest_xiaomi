@@ -9,4 +9,7 @@ export class AdminService {
         return await this.adminModel.find(json)
     }
 
+    async insert(json={}){
+        return await this.adminModel.insert(json)
+    }
 }

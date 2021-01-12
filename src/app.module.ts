@@ -11,7 +11,7 @@ import{AdminauthMiddleware}  from './middleware/adminauth.middleware'
 @Module({
 
   //配置数据库连接
-  imports: [MongooseModule.forRoot('mongodb://192.168.29.131:27017/kdx', { useNewUrlParser: true }),
+  imports: [MongooseModule.forRoot('mongodb://192.168.1.27:27017/kdx', { useNewUrlParser: true }),
    AdminModule, DefaultModule, ApiModule],
   controllers: [AppController],
   providers: [AppService],
@@ -22,6 +22,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AdminauthMiddleware)
-      .forRoutes('admin/*');
+      .forRoutes('admin/login');
   }
 }

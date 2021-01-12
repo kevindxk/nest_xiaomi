@@ -10,6 +10,13 @@ export class LoginController {
     constructor(private toolsService: ToolsService, private adminService: AdminService) { };
 
 
+    // @Get('admin/register')
+    // async register(){
+    //     return "this is register"
+    // }
+
+
+
     @Get()
     @Render('admin/login')
     async index() {
@@ -36,6 +43,7 @@ export class LoginController {
         var username: String = body.username;
         var password: String = body.password;
         // console.log(code);
+        // console.log(req.session.code)
         try {
             if (username == "" || password.length < 6) {
                 console.log("用户名 或密码不合法")
