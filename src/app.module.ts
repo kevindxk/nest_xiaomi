@@ -11,6 +11,7 @@ import{InitMiddleware}  from './middleware/init.middleware'
 
 //配置全局config
 import {Config} from './config/config'
+import { RoleService } from './service/role/role.service';
 
 
 @Module({
@@ -19,7 +20,7 @@ import {Config} from './config/config'
   imports: [MongooseModule.forRoot('mongodb://192.168.1.27:27017/kdx', { useNewUrlParser: true }),
    AdminModule, DefaultModule, ApiModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RoleService],
 })
 // export class AppModule { }
 
