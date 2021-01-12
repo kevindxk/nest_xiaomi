@@ -12,10 +12,14 @@ export class AdminauthMiddleware implements NestMiddleware {
     //1.获取session里保存的用户信息
     var userinfo = req.session.userinfo;
     if(userinfo && userinfo.username) {
-      next();
+     
+       //设置全局变量
+       res.locals.userinfo = userinfo;
+       next();
     } else {
       //排除不需要做权限验证的页面
       if (pathname == "/admin/login" || pathname == "/admin/login/code" || pathname == "/admin/login/dologin") {
+       
         next();
       } else {
         res.redirect('/admin/login')

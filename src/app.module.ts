@@ -7,6 +7,11 @@ import { ApiModule } from './module/api/api.module';
 import { MongooseModule } from '@nestjs/mongoose'
 //配置中间件
 import{AdminauthMiddleware}  from './middleware/adminauth.middleware'
+import{InitMiddleware}  from './middleware/init.middleware'
+
+//配置全局config
+import {Config} from './config/config'
+
 
 @Module({
 
@@ -22,6 +27,8 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AdminauthMiddleware)
-      .forRoutes('admin/login');
+      .forRoutes(`${Config.adminPath}/login`)
+      .apply(InitMiddleware)
+      .forRoutes('*');
   }
 }
