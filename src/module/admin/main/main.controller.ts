@@ -10,7 +10,7 @@ export class MainController {
     }
 
     @Get('welcome')
-    @Render(`${Config.adminPath}/main/welcone`)
+    @Render(`${Config.adminPath}/main/welcome`)
     welcome(){
         return {};
     }

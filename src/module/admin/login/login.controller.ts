@@ -12,13 +12,6 @@ export class LoginController {
     constructor(private toolsService: ToolsService, private adminService: AdminService) { };
 
 
-    // @Get('admin/register')
-    // async register(){
-    //     return "this is register"
-    // }
-
-
-
     @Get()
     @Render(`${Config.adminPath}/login`)
     async index() {
