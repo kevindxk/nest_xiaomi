@@ -20,7 +20,7 @@ import { RoleService } from './service/role/role.service';
   imports: [MongooseModule.forRoot('mongodb://192.168.1.27:27017/kdx', { useNewUrlParser: true }),
    AdminModule, DefaultModule, ApiModule],
   controllers: [AppController],
-  providers: [AppService, RoleService],
+  providers: [AppService],
 })
 // export class AppModule { }
 

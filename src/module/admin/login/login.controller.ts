@@ -20,7 +20,7 @@ export class LoginController {
 
 
     @Get()
-    @Render('admin/login')
+    @Render(`${Config.adminPath}/login`)
     async index() {
         console.log(await this.adminService.find())
         return {};
@@ -64,12 +64,12 @@ export class LoginController {
                     }
                 } else {
 
-                    this.toolsService.error(res,"验证码不正确",'admin/login')
+                    this.toolsService.error(res,"验证码不正确",`${Config.adminPath}/login`)
                     console.log("验证码不正确")
                 }
             }
         } catch (error) {
-            res.redirect('/admin/login')
+            res.redirect(`${Config.adminPath}/login`)
         }
         // return "成功";
     }
@@ -77,7 +77,7 @@ export class LoginController {
     @Get('loginOut')
     loginOut(@Request() req,@Response() res){
         req.session.userinfo = null;
-        res.redirect('/admin/login')
+        res.redirect(`${Config.adminPath}/login`)
     }
 
 }

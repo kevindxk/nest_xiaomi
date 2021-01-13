@@ -1,4 +1,5 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
+import {Config } from '../config/config'
 
 @Injectable()
 export class AdminauthMiddleware implements NestMiddleware {
@@ -18,11 +19,11 @@ export class AdminauthMiddleware implements NestMiddleware {
        next();
     } else {
       //排除不需要做权限验证的页面
-      if (pathname == "/admin/login" || pathname == "/admin/login/code" || pathname == "/admin/login/dologin") {
+      if (pathname == `${Config.adminPath}/login` || pathname ==`${Config.adminPath}/login/code` || pathname == `${Config.adminPath}/login/dologin`) {
        
         next();
       } else {
-        res.redirect('/admin/login')
+        res.redirect(`${Config.adminPath}/login`)
       }
 
     }
