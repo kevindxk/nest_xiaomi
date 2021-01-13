@@ -1,15 +1,21 @@
-import { Mongoose } from "mongoose"
-import { from } from "rxjs"
 import * as mongoose from "mongoose";
 
 const Schmea = mongoose.Schema;
 
+var d = new Date();
+
 export const RoleSchema = new Schmea({
 
-    _id: String,
-    title: String,
-    description: String,
-    status: Number
+    title:{type:String} ,
+    description: {type:String},
+    status: {
+        type:Number,
+        default:1
+    },
+    add_time:{
+        type:Number,
+        default:d.getTime()
+    }
 
 })
 
