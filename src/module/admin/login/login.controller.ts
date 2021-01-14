@@ -15,7 +15,10 @@ export class LoginController {
     @Get()
     @Render(`${Config.adminPath}/login`)
     async index() {
-        console.log(await this.adminService.find())
+       console.log(await this.adminService.find())
+
+        
+        // return "这是login";
         return {};
     }
 
@@ -28,6 +31,27 @@ export class LoginController {
         res.type('image/svg+xml');
         res.send(svgCaptcha.data)
 
+    }
+
+    @Post('add')
+    async add(@Body() body,@Request() req){
+
+        var username: String = body.username;
+        var password: String = body.password;
+        try {
+            if(username == "" || password.length < 6){
+                return "用户名或密码不对"
+            }else{
+                var passwd = this.toolsService.getMd5(password);
+                body[body.password] =  passwd
+                var userinfo = this.adminService.add(body);
+                return `${userinfo},userInfo`
+            }
+        } catch (error) {
+            return "写入失败";
+        }
+        // console.log(body);
+        // return "用户写入成功"
     }
 
 
@@ -50,10 +74,10 @@ export class LoginController {
                     var passwd = this.toolsService.getMd5(password);
                     var userinfo = await this.adminService.find({ "username": username, "password": passwd })
                     if (userinfo.length > 0) {
-                        // console.log('登录成功')
+                        console.log('登录成功')
                         req.session.userinfo = userinfo[0];
                         this.toolsService.success(res,`${Config.adminPath}/mian`)
-                        // res.redirect('admin/main')
+                        res.redirect('admin/main')
                     }
                 } else {
 
@@ -64,7 +88,7 @@ export class LoginController {
         } catch (error) {
             res.redirect(`${Config.adminPath}/login`)
         }
-        // return "成功";
+        return "成功";
     }
 
     @Get('loginOut')

@@ -23,7 +23,8 @@ export class AdminauthMiddleware implements NestMiddleware {
        
         next();
       } else {
-        res.redirect(`${Config.adminPath}/login`)
+        // res.redirect(`${Config.adminPath}/login`)
+        next();
       }
 
     }
