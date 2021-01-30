@@ -78,3 +78,79 @@ nest学习
 - 创建项目 nest new nestdemo
 - 运行项目 yarn run start/npm run start:dev
 - 127.0.0.1:3000
+
+## nest模块
+### Controller
+
+### Providers
+
+### Module
+
+### Middleware
+
+### Filter
+
+### Pipe
+
+### Guard
+
+
+### IntercePtor
+
+
+### 工作原理
+- 1.定义一个服务，然后通过@Injectable()装饰器装饰
+```code 
+  import { Injectable } from '@nestjs/common';
+  import { AdminInterface } from './interfaces/admin.interface';
+
+@Injectable()
+export class AdminService {
+    constructor(@InjectModel('admin') private readonly adminModel){}
+
+    async find(json={}){
+        return await this.adminModel.find(json)
+    }
+
+    async add (json:AdminInterface){
+
+        var aduser  = new this.adminModel(json)
+        var result = aduser.save();
+        return result;
+    }
+
+    async insert(json={}){
+        return await this.adminModel.insert(json)
+    }
+}
+```
+- 2.把提供的服务注入到控制器类中
+```
+  @Controller(`${Config.adminPath}/login`)
+  export class LoginController {
+
+    constructor(private toolsService: ToolsService, private adminService: AdminService) { };
+
+
+    @Get()
+    @Render(`${Config.adminPath}/login`)
+    async index() {
+       console.log(await this.adminService.find())
+
+        
+        // return "这是login";
+        return {};
+    }
+```
+- 3.把 Nest IoC 容器中注册提供程序
+```
+  @Module({
+  imports:[
+    MongooseModule.forFeature([{name:'admin',schema:AdminSchema,collection:"admin"},
+    {name:'Role',schema:RoleSchema,collection:"role"}
+  ])
+  ],
+  controllers: [MainController, LoginController, ManagerController, RegisterController, RoleController],
+  providers:[ToolsService,AdminService,RoleService]
+  })
+```
